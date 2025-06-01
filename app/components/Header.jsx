@@ -16,10 +16,7 @@ export default function Header() {
             {" "}
             <Link href={"/quiz"}>Quiz</Link>
           </li>
-          <li>
-            {" "}
-            <Link href={"/result"}>Result</Link>
-          </li>
+
           <li>
             {" "}
             <Link href={"/about"}>About</Link>

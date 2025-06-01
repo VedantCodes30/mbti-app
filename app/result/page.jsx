@@ -12,12 +12,14 @@ export default function ResultPage() {
     const rawAnswers = JSON.parse(sessionStorage.getItem("mbti-answers")) || [];
 
     if (rawAnswers.length === 0) {
-      // No data, redirect back
       router.push("/");
       return;
     }
 
-    // 1. Initialize vote counters
+    // Debug: log the answers to verify they're correct
+    console.log("Answers from session:", rawAnswers);
+
+    // Count votes per trait
     const scores = {
       E: 0,
       I: 0,
@@ -29,56 +31,68 @@ export default function ResultPage() {
       P: 0,
     };
 
-    // 2. Tally the answers
-    for (const ans of rawAnswers) {
-      if (ans.value) {
-        scores[ans.trait] += 1; // Agree → support the trait
+    const getOppositeTrait = (trait) => {
+      const map = {
+        E: "I",
+        I: "E",
+        S: "N",
+        N: "S",
+        T: "F",
+        F: "T",
+        J: "P",
+        P: "J",
+      };
+      return map[trait];
+    };
+
+    for (const answer of rawAnswers) {
+      if (!answer || !answer.trait) continue;
+
+      const trait = answer.trait;
+      if (answer.value === true) {
+        scores[trait] += 1;
       } else {
-        // Disagree → support the opposite
-        const opposite = getOppositeTrait(ans.trait);
+        const opposite = getOppositeTrait(trait);
         scores[opposite] += 1;
       }
     }
 
-    // 3. Construct MBTI result
-    const result =
+    const finalType =
       (scores.E >= scores.I ? "E" : "I") +
       (scores.S >= scores.N ? "S" : "N") +
       (scores.T >= scores.F ? "T" : "F") +
       (scores.J >= scores.P ? "J" : "P");
 
-    setMbti(result);
+    console.log("MBTI scores:", scores);
+    console.log("Calculated MBTI:", finalType);
+
+    setMbti(finalType);
   }, [router]);
 
-  const getOppositeTrait = (trait) => {
-    const map = {
-      E: "I",
-      I: "E",
-      S: "N",
-      N: "S",
-      T: "F",
-      F: "T",
-      J: "P",
-      P: "J",
-    };
-    return map[trait];
-  };
-
   return (
-    <div>
-      <h1>Your MBTI Type Is:</h1>
-      <p>{mbti}</p>
-      {mbti && (
-        <p>{mbtiDescriptions[mbti] || "No Description found for this type."}</p>
-      )}
-      <button
-        onClick={() => {
-          sessionStorage.clear();
-          router.push("/quiz");
-        }}
-      >
-        Restart Quiz
-      </button>
-    </div>
+    <section className="result-page">
+      <div className="results">
+        <div className="flex items-center justify-center flex-col gap-2">
+          <h1 className="text-2xl font-semibold">Your MBTI Type Is:</h1>
+          <p className="text-4xl text-gradient font-bold">{mbti}</p>
+        </div>
+
+        {mbti && (
+          <p className="text-center text-sm mt-4">
+            {mbtiDescriptions[mbti] || "No Description found for this type."}
+          </p>
+        )}
+
+        <button
+          className="mt-6 border border-gray-300 px-4 py-2 rounded hover:bg-gray-100"
+          onClick={() => {
+            sessionStorage.clear();
+            router.push("/quiz");
+          }}
+        >
+          Restart Quiz
+        </button>
+      </div>
+    </section>
   );
 }

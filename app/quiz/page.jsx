@@ -31,8 +31,9 @@ export default function Quiz() {
       value: agrees,
     };
 
-    //Updated Answers
-    const updatedAnswers = [...answers, newAnswer];
+    const updatedAnswers = [...answers];
+    updatedAnswers[current] = newAnswer; // Use index to avoid duplicates
+
     setAnswers(updatedAnswers);
 
     if (current + 1 < questions.length) {
@@ -44,15 +45,17 @@ export default function Quiz() {
 
   const q = questions[current];
   return (
-    <div>
-      <h2>
-        Question {current + 1} of {questions.length}
-      </h2>
-      <p>{q.text}</p>
-      <div>
-        <button onClick={() => handleAnswers(true)}>Agree</button>
-        <button onClick={() => handleAnswers(false)}>Disagree</button>
+    <section className="quiz-section">
+      <div className="quiz">
+        <h2>
+          Question {current + 1} of {questions.length}
+        </h2>
+        <p>{q.text}</p>
+        <div className="flex gap-8 items-center justify-center">
+          <button onClick={() => handleAnswers(true)}>Agree</button>
+          <button onClick={() => handleAnswers(false)}>Disagree</button>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
