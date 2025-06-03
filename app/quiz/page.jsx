@@ -2,12 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useTransitionRouter } from "next-view-transitions";
 import questions from "../lib/questions";
 
 export default function Quiz() {
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState([]);
-  const router = useRouter();
+  const router = useTransitionRouter();
 
   //Load from session storage
   useEffect(() => {

@@ -1,8 +1,8 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { useTransitionRouter } from "next-view-transitions";
 
 export default function Home() {
-  const router = useRouter();
+  const router = useTransitionRouter();
 
   const startQuiz = () => {
     sessionStorage.clear();

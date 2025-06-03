@@ -1,10 +1,10 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 
 export default function Header() {
   return (
     <header>
       <div className="logo">
-        <Link href={"/"}>PersonaQuest</Link>
+        <Link href="/">PersonaQuest</Link>
       </div>
       <nav>
         <ul>

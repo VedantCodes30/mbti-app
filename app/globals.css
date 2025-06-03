@@ -1,5 +1,36 @@
 @import "tailwindcss";
 
+/* Modern slide transition with smooth fade and transform */
+::view-transition-old(root) {
+  animation: slide-out 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+::view-transition-new(root) {
+  animation: slide-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes slide-out {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-20%);
+    opacity: 0;
+  }
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(20%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 header {
   padding: 0.8rem 2.5rem;
   @apply bg-black text-white flex relative  p-1  justify-between items-center text-xl;
