@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
-/* Modern slide transition with smooth fade and transform */
+html {
+  scroll-behavior: smooth;
+}
+
 ::view-transition-old(root) {
   animation: slide-out 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
@@ -11,11 +14,9 @@
 
 @keyframes slide-out {
   0% {
-    transform: translateX(0);
     opacity: 1;
   }
   100% {
-    transform: translateX(-20%);
     opacity: 0;
   }
 }
@@ -100,6 +101,10 @@ body {
   @apply bg-linear-to-r/increasing bg-clip-text font-bold text-transparent from-indigo-200 to-indigo-200;
 }
 
+.bg-gradient {
+  @apply rounded-lg bg-linear-to-b/increasing from-indigo-500 to-fuchsia-600  flex flex-col gap-4 items-center;
+}
+
 .result-page {
   @apply flex flex-col h-screen items-center justify-center;
   .results {
@@ -116,5 +121,16 @@ body {
     button {
       @apply self-center w-fit border p-2 rounded-2xl transition-all cursor-pointer hover:bg-linear-to-l from-pink-600 to-blue-500 text-white;
     }
+  }
+}
+
+.learn-more {
+  li {
+    list-style: none;
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
   }
 }

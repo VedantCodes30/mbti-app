@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { useTransitionRouter } from "next-view-transitions";
 import questions from "../lib/questions";
 

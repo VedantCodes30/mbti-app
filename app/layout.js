@@ -1,6 +1,5 @@
 import "./globals.css";
 import { Manrope } from "next/font/google";
-import { ReactLenis } from "lenis/react";
 import Header from "./components/Header";
 import { ViewTransitions } from "next-view-transitions";
 
@@ -22,7 +21,7 @@ export default function RootLayout({ children }) {
       <html lang="en">
         <body className={manrope.className}>
           <Header />
-          <ReactLenis root>{children}</ReactLenis>
+          {children}
         </body>
       </html>
     </ViewTransitions>
