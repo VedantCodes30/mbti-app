@@ -50,7 +50,7 @@ export default function Quiz() {
         <h2>
           Question {current + 1} of {questions.length}
         </h2>
-        <p>{q.text}</p>
+        <p className="text-center"> {q.text}</p>
         <div className="flex gap-8 items-center justify-center">
           <button onClick={() => handleAnswers(true)}>Agree</button>
           <button onClick={() => handleAnswers(false)}>Disagree</button>
