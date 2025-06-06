@@ -4,6 +4,10 @@ html {
   scroll-behavior: smooth;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 ::view-transition-old(root) {
   animation: slide-out 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
